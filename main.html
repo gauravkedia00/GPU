@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>GPU Web Application</title>
+	<link href="/stylesheets/tablestyle.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+	<h1 style="text-align:center;"> Welcome to the GPU Web Application!!!</h1>
+	<h5 style="text-align:center;"> Refresh to see changes if any update </h5>
+	<h3> You can Add a GPU over here: </h3>
+    {% if user %}
+	
+		<form method = "post" action="/">
+			<input type = "text" name = "name" placeholder = "Enter GPU Name" /></br></br>
+			<input type = "checkbox" name ="geometryShader" />Geometry Shader</br>
+			<input type = "checkbox" name ="tesselationShader" /> Tesselation Shader</br>
+			<input type = "checkbox" name ="shaderInt16" />Shader Int16</br>
+			<input type = "checkbox" name ="sparseBinding" />Sparse Binding</br>
+			<input type = "checkbox" name ="textureCompressionETC2" />Texture Compression ETC2</br>
+			<input type = "checkbox" name ="vertexPipelineStoresAndAtomics" />Vertex Pipeline Stores And Atomics</br></br>
+			<input type = "submit" name = "submit" value = "submit"/>
+		</form>
+		
+	{% else %}
+	<p> Hello, Welcome to the application</p>
+    {% endif %}
+    <p>you can {{ url_string }} <a href='{{ url }}'>here</a></p>
+	<h1 style="text-align:center;"> GPU's & ITS FEATURES </h1>
+	<h3> Click on "GPU's name" to EDIT & To search for a particular feature click on "Search Button"</h3>
+	<h4> Note: You have to login first</h4>
+	<form method="get">
+		<table>
+		
+		<tbody>
+
+				<tr>
+					<td>GPU's Name<input type = "submit" name = "Search" value="Search"/></td>
+						<td><input type = "checkbox" name="filter_geometryShader"  {% if f_geometryShader %} checked {% endif %} />geometryShader</td>
+						<td><input type = "checkbox" name="filter_tesselationShader" {% if f_tesselationShader %} checked {% endif %} />tesselationShader</td>
+						<td><input type = "checkbox" name="filter_shaderInt16" {% if f_shaderInt16 %} checked {% endif %} />shaderInt16</td>
+						<td><input type = "checkbox" name="filter_sparseBinding"{% if f_sparseBinding %} checked {% endif %}/>sparseBinding</td>
+						<td><input type = "checkbox" name="filter_textureCompressionETC2"{% if f_textureCompressionETC2 %} checked {% endif %}/>textureCompressionETC2</td>
+						<td><input type = "checkbox" name="filter_vertexPipelineStoresAndAtomics"{% if f_vertexPipelineStoresAndAtomics %} checked {% endif %}/>vertexPipelineStoresAndAtomics</td>
+				</tr>
+
+			{% for mygpu in gpu_array %}
+				<tr>
+					<td>
+						<a href="/edit?name={{ mygpu.key.id() }}">{{ mygpu.key.id() }}</a>
+						<a href="/delete?name={{ mygpu.key.id() }}"><form><input type ="button" name="Delete" value="Delete"/></form></a>	
+					</td>
+						<td> {{ mygpu.geometryShader}} </td>
+						<td> {{	mygpu.tesselationShader }} </td>
+						<td> {{	mygpu.shaderInt16 }} </td>
+						<td> {{	mygpu.sparseBinding }} </td>
+						<td> {{ mygpu.textureCompressionETC2 }} </td>
+						<td> {{	mygpu.vertexPipelineStoresAndAtomics }} </td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+<html>
+	<head>
+		<meta charset="urf-8"/>
+		<title>Update GPU information</title>
+	</head>
+	<body>
+    {% if user %}
+	
+		<form method = "post">
+			<input type = "text" name = "name" value="{{ mygpu.key.id() }}" disabled /></br>
+			<input type = "checkbox" name ="geometryShader" {% if mygpu.geometryShader %} checked {% endif %} />Geometry Try Shader</br>
+			<input type = "checkbox" name ="tesselationShader" {% if mygpu.tesselationShader %} checked {% endif %} /> Tesselation Shader</br>
+			<input type = "checkbox" name ="shaderInt16" {% if mygpu.shaderInt16 %} checked {% endif %}  />Shader Int16</br>
+			<input type = "checkbox" name ="sparseBinding" {% if mygpu.sparseBinding %} checked {% endif %} />Sparse Binding</br>
+			<input type = "checkbox" name ="textureCompressionETC2" {% if mygpu.textureCompressionETC2 %} checked {% endif %} />Texture Compression ETC2</br>
+			<input type = "checkbox" name ="vertexPipelineStoresAndAtomics" {% if mygpu.vertexPipelineStoresAndAtomics %} checked {% endif %} />Vertex Pipeline Stores And Atomics</br>
+			<input type = "submit" name = "submit" value = "submit" />
+			<input type="submit" value="Go back" name="cancel" />
+		</form>
+		
+	{% else %}
+	<p> Please login in to begin</p>
+    {% endif %}
+    <p>you can {{ url_string }} <a href='{{ url }}'>here</a></p>
+	
+	</body>
+</html>
